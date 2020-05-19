@@ -14,7 +14,6 @@ public class Estado {
 		return this.circuito;
 	}
 
-	// Recorrer matriz con for (cloneCircuito)
 	public int[][] cloneCircuito(int[][] c) {
 		for (int i = 0; i < this.circuito.length; i++) {
 			for (int j = 0; j < this.circuito.length; j++) {
@@ -28,12 +27,12 @@ public class Estado {
 	public boolean equals(Object otroEstado) {
 		
 		if (!(otroEstado instanceof Estado)) {
-			System.out.println("----> ï¿½ï¿½ï¿½ï¿½ Estas intentado comparar objetos DIFERENTES !!!! <----");
+			//System.out.println("----> ï¿½ï¿½ï¿½ï¿½ Estas intentado comparar objetos DIFERENTES !!!! <----");
 			return false;
 		}
 
 		if (Arrays.deepEquals(this.getCircuito(), ((Estado) otroEstado).getCircuito())) {
-			 System.out.println("----> ¡¡¡¡¡¡ Circuitos IGUALES !!!!!! <----");
+			 //System.out.println("----> ¡¡¡¡¡¡ Circuitos IGUALES !!!!!! <----");
 			return true;
 		} else
 			return false;

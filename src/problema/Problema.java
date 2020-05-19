@@ -1,18 +1,17 @@
 package problema;
 
 import java.util.ArrayList;
-import java.util.Random;
+
 
 import problema.Practica1;
 
 public class Problema {
 
 	protected Estado circuito;
-	protected int n, nCars, seed;
-	// private final Estado circuitoInicial;
+	protected int n, nCars, seed;	
 
 	public Problema(int[][] circuito, int n, int nCars, int seed) {
-		
+
 		this.circuito = new Estado(circuito);
 		this.n = n;
 		this.nCars = nCars;
@@ -41,8 +40,7 @@ public class Problema {
 				}
 			}
 		}
-
-		// Calculamos la nueva posicion
+		
 		switch (accion.id) {
 		case IZQUIERDA:
 			y--;
@@ -89,9 +87,8 @@ public class Problema {
 
 			return new Estado(circuitoNuevo);
 		}
-		// Si no ha entrado dentro de los anteriores otros casos,
-		// hay un muro u otro coche
 		
+
 		return null;
 
 	}
@@ -107,27 +104,26 @@ public class Problema {
 
 				if ((circuito[i][j] != 0) && (circuito[i][j] != -1)) {
 
-					// Movimiento hacia abajo
+					
 					if (i < circuito.length - 1) {
 						if (circuito[i + 1][j] == 0) {
 							acciones.add(new Accion(Accion.Movimiento.ABAJO, circuito[i][j]));
 						}
 					}
-					// Movimiento hacia arriba
+					
 					if (i > 0) {
 						if (circuito[i - 1][j] == 0) {
 							acciones.add(new Accion(Accion.Movimiento.ARRIBA, circuito[i][j]));
 						}
 					}
 
-					// Movimiento hacia derecha
+					
 					if (j < circuito.length - 1) {
 						if (circuito[i][j + 1] == 0) {
 							acciones.add(new Accion(Accion.Movimiento.DERECHA, circuito[i][j]));
 						}
 					}
 
-					// Movimiento hacia izquierda
 					if (j > 0) {
 						if (circuito[i][j - 1] == 0) {
 							acciones.add(new Accion(Accion.Movimiento.IZQUIERDA, circuito[i][j]));
@@ -159,7 +155,6 @@ public class Problema {
 
 		}
 
-		// Calculamos la nueva posicon
 		switch (accion.id) {
 		case IZQUIERDA:
 			y--;
@@ -175,11 +170,10 @@ public class Problema {
 			break;
 		}
 
-		// Comprobacion de que no se sale de los limites del circuito la nueva posicion
 		if ((x < 0) || (x > circuitoNuevo.length - 1) || (y < 0) || (y > circuitoNuevo.length - 1)) {
 			return Double.POSITIVE_INFINITY;
 		}
-		// Si la nueva posicion es disponible coste 1
+
 		if (circuitoNuevo[x][y] == 0) {
 			return 1.0;
 		}
@@ -195,11 +189,12 @@ public class Problema {
 		// int nCoches = 0;
 
 		for (int j = 0; j < circuitoNuevo.length; j++) {
-			for (int i = (circuitoNuevo.length-1); i < circuitoNuevo.length; i++) {		
-				
-				if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1))  nCochesFinal++;
-				if (nCochesFinal == this.nCars) return true;
-					
+			for (int i = (circuitoNuevo.length - 1); i < circuitoNuevo.length; i++) {
+
+				if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1))
+					nCochesFinal++;
+				if (nCochesFinal == this.nCars)
+					return true;
 
 				// Comprueba que en dicha posicion haya un coche
 				// if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1)) {
@@ -209,7 +204,7 @@ public class Problema {
 
 				// si la i (filas) es igual a la longitud de la matriz, el coche estara en la
 				// ultima fila
-				
+
 //				if (i == (circuitoNuevo.length) - 1) {
 //					nCochesFinal++;
 //					System.out.println(nCochesFinal + " : Coches FINAL   ");
@@ -229,8 +224,8 @@ public class Problema {
 
 	public double heuristica(Estado estado) {
 
-		// Calculamos la suma de las distancias en linea recta
-		// de cada coche para llegar a la ultima fila
+		// Calculamos la suma de las distancias en linea recta de cada coche para llegar
+		// a la ultima fila
 		int[][] circuitoNuevo = new int[this.n][this.n];
 		estado.cloneCircuito(circuitoNuevo);
 		double distancia = 0;
@@ -242,7 +237,7 @@ public class Problema {
 				}
 			}
 		}
-		System.out.println("\n**Distancia Heuristica1 : " + distancia);
+		System.out.println("----------------------------------> Distancia Heuristica 1 : " + distancia);
 		return distancia;
 	}
 

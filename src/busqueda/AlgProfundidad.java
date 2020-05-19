@@ -16,32 +16,27 @@ public class AlgProfundidad extends AlgBusqueda {
 
     @Override
     public void busqueda() {
-        // Inicializamos las variables
+        
         costeTotal = 0;
         nodosExpandidos = 0;
         nodosGenerados = 0;
         longSol = 0;
         tiempoBusqueda = System.currentTimeMillis();
 
-        // Crea el array para la secuencia de acciones
-        secuenciaAcciones = new ArrayList<Accion>();
-
-        // Crea las estructuras necesarias para implementar el algoritmo
-       //Nodos abiertos:
-        Stack<Nodo> abiertos = new Stack<Nodo>();
-        //Nodos cerrados:
+       
+        secuenciaAcciones = new ArrayList<Accion>();       
+        Stack<Nodo> abiertos = new Stack<Nodo>();        
         ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
-        // Variables auxiliares
+       
         Nodo elegido;
         ArrayList<Nodo> sucesores;
 
-        // Creamos la raíz del árbol
         elegido = new Nodo(problema.estadoInicial());
 
         abiertos.push(elegido);
         // Bucle principal
         do {
-            // Si no quedan nodos abiertos, retorna
+           
             if (abiertos.size() == 0) {
                 return;
             }

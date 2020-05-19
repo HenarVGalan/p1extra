@@ -14,13 +14,13 @@ public class Practica1 {
 
 	public static void main(String[] args) {
 
-		// Leeemos los argumentos
+		
 		int n = Integer.parseInt(args[0]);
 		int ncoches = Integer.parseInt(args[1]);
 		int seed = Integer.parseInt(args[2]);
 		String alg = args[4];
 
-		// Creamos la matriz y el problema de busqueda
+		
 		int[][] circuito = getProblemInstance(n, ncoches, seed);
 		Problema problema = new Problema(circuito, n, ncoches, seed);
 		
@@ -49,7 +49,7 @@ public class Practica1 {
 				algBusq.busqueda();
 				break;
 			case "BestFirst":
-				algBusq = new AlgoPrimeroMejor();
+				algBusq = new AlgPrimeroMejor();
 				algBusq.setProblema(problema);
 				algBusq.busqueda();
 				break;

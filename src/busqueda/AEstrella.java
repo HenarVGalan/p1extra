@@ -24,36 +24,27 @@ public class AEstrella extends AlgBusqueda {
      */
     @Override
     public void busqueda() {
-        // Inicializamos las variables
+       
         costeTotal = 0;
         nodosExpandidos = 0;
         nodosGenerados = 0;
         longSol = 0;
         tiempoBusqueda = System.currentTimeMillis();
-
-        // Crea el array para la secuencia de acciones
+        
         secuenciaAcciones = new ArrayList<Accion>();
-
-        // Crea las estructuras necesarias para implementar el algoritmo
-        //Nodos cerrados:
         ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
-        Comparator<Nodo> comparator = Nodo.BY_EVALUATION;
-        //Nodos abiertos:
+        Comparator<Nodo> comparator = Nodo.BY_EVALUATION;     
         PriorityQueue<Nodo> abiertos = new PriorityQueue<Nodo>(comparator);
 
-        // Variables auxiliares
         Nodo elegido;
         ArrayList<Nodo> sucesores;
-
-        // Creamos la ra√≠z del √°rbol
-        elegido = new Nodo(problema.estadoInicial());
-
       
+        elegido = new Nodo(problema.estadoInicial());      
         abiertos.add(elegido);
 
         // Bucle principal
         do {
-            // Si no quedan nodos abiertos, retorna
+           
             if (abiertos.size() == 0) {
                 return;
             }
@@ -80,12 +71,9 @@ public class AEstrella extends AlgBusqueda {
             elegido = elegido.getPadre();
         }
 
-        // Calcula el tiempo de b√∫squeda
         tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
-
-        // Una vez obtenida la lista de acciones, le da la vuelta
         Collections.reverse(secuenciaAcciones);
-        System.out.println("SOLUCI”N:");
+        System.out.println("****   SOLUCI”N ALGORITMO A*  *****");
         for (int i = 0; i < secuenciaAcciones.size(); i++) {
             longSol++;
             System.out.println(secuenciaAcciones.get(i).toString());

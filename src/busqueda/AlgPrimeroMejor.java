@@ -15,44 +15,31 @@ import problema.Accion;
  *
  * @author Jose
  */
-public class AlgoPrimeroMejor extends AlgBusqueda {
+public class AlgPrimeroMejor extends AlgBusqueda {
 
-// Search
-    /**
-     * Implements a template search algorithm.
-     */
     @Override
     public void busqueda() {
-        // Inits performance variables
-        // Inicializamos las variables
+  
         costeTotal = 0;
         nodosExpandidos = 0;
         nodosGenerados = 0;
         longSol = 0;
         tiempoBusqueda = System.currentTimeMillis();
-
-        // Crea el array para la secuencia de acciones
         secuenciaAcciones = new ArrayList<Accion>();
 
-        // Crea las estructuras necesarias para implementar el algoritmo:
         ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
         Comparator<Nodo> comparator = Nodo.BY_HEURISTIC;
         PriorityQueue<Nodo> abiertos = new PriorityQueue<Nodo>(comparator);
 
-        // Variables auxiliares
         Nodo elegido;
         ArrayList<Nodo> sucesores;
 
-        // Crea la raíz del árbol
-        elegido = new Nodo(problema.estadoInicial());
-
-       
+        elegido = new Nodo(problema.estadoInicial());       
         sucesores = getSucesores(elegido);
-
         abiertos.add(elegido);
-        // Bucle principal
+       
         do {
-            // Si no quedan nodos abiertos, retorna
+            
             if (abiertos.size() == 0) {
                 return;
             }
@@ -79,12 +66,12 @@ public class AlgoPrimeroMejor extends AlgBusqueda {
             elegido = elegido.getPadre();
         }
 
-        // Calculates the search time.
+        
         tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
 
         // Una vez obtenida la lista de acciones, le da la vuelta
         Collections.reverse(secuenciaAcciones);
-        System.out.println("SOLUCIÓN:");
+        System.out.println("****   SOLUCI�N ALGORITMO PRIMERO MEJOR - BEST FIRST  *****");
         for(int i=0;i<secuenciaAcciones.size();i++){
             longSol++;
             System.out.println(secuenciaAcciones.get(i).toString());
