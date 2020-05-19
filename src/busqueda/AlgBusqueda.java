@@ -5,7 +5,7 @@
  */
 package busqueda;
 
-import problema.*;
+
 import busqueda.Nodo;
 import java.util.ArrayList;
 import problema.Accion;

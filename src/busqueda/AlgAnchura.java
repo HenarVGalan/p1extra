@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import problema.Accion;
-import problema.Practica1;
+
 
 public class AlgAnchura extends AlgBusqueda {
 

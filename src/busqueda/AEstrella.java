@@ -1,15 +1,10 @@
 package busqueda;
 
-import java.awt.BorderLayout;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
-
-import busqueda.Nodo.CostComparator;
 import problema.Accion;
 
 /**

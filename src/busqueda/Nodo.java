@@ -1,7 +1,6 @@
 package busqueda;
 
 import java.util.Comparator;
-import java.util.PriorityQueue;
 import problema.Accion;
 import problema.Estado;
 
