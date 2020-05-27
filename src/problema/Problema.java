@@ -226,18 +226,20 @@ public class Problema {
 
 		// Calculamos la suma de las distancias en linea recta de cada coche para llegar
 		// a la ultima fila
-		int[][] circuitoNuevo = new int[this.n][this.n];
-		estado.cloneCircuito(circuitoNuevo);
+		int[][] circuitoNuevo = estado.getCircuito();
+		//No hace falta clonar , no moficamos nada, recorremos el circuito de estado. 
+		//estado.cloneCircuito(circuitoNuevo);
+		
 		double distancia = 0;
 
 		for (int i = 0; i < circuitoNuevo.length; i++) {
 			for (int j = 0; j < circuitoNuevo.length; j++) {
 				if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1)) {
-					distancia = distancia + ((circuitoNuevo.length) - i);
+					distancia = distancia + ((circuitoNuevo.length)- 1 -i);
 				}
 			}
 		}
-		System.out.println("----------------------------------> Distancia Heuristica 1 : " + distancia);
+		//System.out.println("----------------------------------> Distancia Heuristica 1 : " + distancia);
 		return distancia;
 	}
 

@@ -21,10 +21,9 @@ public class AlgProfundidad extends AlgBusqueda {
         nodosExpandidos = 0;
         nodosGenerados = 0;
         longSol = 0;
-        tiempoBusqueda = System.currentTimeMillis();
-
-       
-        secuenciaAcciones = new ArrayList<Accion>();       
+        tiempoBusqueda = System.currentTimeMillis();       
+        secuenciaAcciones = new ArrayList<Accion>();
+        
         Stack<Nodo> abiertos = new Stack<Nodo>();        
         ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
        
@@ -34,7 +33,7 @@ public class AlgProfundidad extends AlgBusqueda {
         elegido = new Nodo(problema.estadoInicial());
 
         abiertos.push(elegido);
-        // Bucle principal
+       
         do {
            
             if (abiertos.size() == 0) {
@@ -42,8 +41,8 @@ public class AlgProfundidad extends AlgBusqueda {
             }
 
             elegido = abiertos.pop();
-
             sucesores = getSucesores(elegido);
+            
             while (!sucesores.isEmpty()) {
                 if (!cerrados.contains(sucesores.get(0))) {
                     abiertos.push(sucesores.get(0));

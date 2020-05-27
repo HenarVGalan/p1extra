@@ -23,7 +23,6 @@ public class Estado {
 		return c;
 	}
 
-	@Override
 	public boolean equals(Object otroEstado) {
 		
 		if (!(otroEstado instanceof Estado)) {

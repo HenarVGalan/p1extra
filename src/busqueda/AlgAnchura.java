@@ -5,10 +5,6 @@
  */
 package busqueda;
 
-/**
- *
- * @author Jose
- */
 import busqueda.AlgBusqueda;
 import busqueda.Nodo;
 import java.util.ArrayList;
@@ -77,7 +73,6 @@ public class AlgAnchura extends AlgBusqueda {
 
 		}
 
-		// Calcula el tiempo de b√∫squeda
 		tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
 		Collections.reverse(secuenciaAcciones);
 		System.out.println("****   SOLUCI”N ALGORITMO ANCHURA - BreathFirst *****");

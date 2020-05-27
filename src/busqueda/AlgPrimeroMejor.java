@@ -11,10 +11,6 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import problema.Accion;
 
-/**
- *
- * @author Jose
- */
 public class AlgPrimeroMejor extends AlgBusqueda {
 
     @Override
@@ -47,9 +43,11 @@ public class AlgPrimeroMejor extends AlgBusqueda {
             elegido = abiertos.element();
             abiertos.remove();
             sucesores = getSucesores(elegido);
+            
             while (!sucesores.isEmpty()) {
                 if (!cerrados.contains(sucesores.get(0))) {
-                    abiertos.add(sucesores.get(0));
+                    
+                	abiertos.add(sucesores.get(0));
                     sucesores.remove(0);
 
                 } else {
@@ -61,8 +59,8 @@ public class AlgPrimeroMejor extends AlgBusqueda {
         } while (!problema.comprobarFinal(elegido.getEstado()));
         costeTotal = elegido.getCoste();
         while (!nodoInicial(elegido)) {
+        	
             secuenciaAcciones.add(elegido.getAccion());
-
             elegido = elegido.getPadre();
         }
 

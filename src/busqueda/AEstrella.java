@@ -24,9 +24,9 @@ public class AEstrella extends AlgBusqueda {
         nodosExpandidos = 0;
         nodosGenerados = 0;
         longSol = 0;
-        tiempoBusqueda = System.currentTimeMillis();
-        
+        tiempoBusqueda = System.currentTimeMillis();        
         secuenciaAcciones = new ArrayList<Accion>();
+        
         ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
         Comparator<Nodo> comparator = Nodo.BY_EVALUATION;     
         PriorityQueue<Nodo> abiertos = new PriorityQueue<Nodo>(comparator);
@@ -35,8 +35,8 @@ public class AEstrella extends AlgBusqueda {
         ArrayList<Nodo> sucesores;
       
         elegido = new Nodo(problema.estadoInicial());      
+        sucesores = getSucesores(elegido);
         abiertos.add(elegido);
-
         // Bucle principal
         do {
            
@@ -47,9 +47,11 @@ public class AEstrella extends AlgBusqueda {
             elegido = abiertos.element();
             abiertos.remove();
             sucesores = getSucesores(elegido);
+            
             while (!sucesores.isEmpty()) {
                 if (!cerrados.contains(sucesores.get(0))) {
-                    abiertos.add(sucesores.get(0));
+                    
+                	abiertos.add(sucesores.get(0));
                     sucesores.remove(0);
 
                 } else {
@@ -61,8 +63,8 @@ public class AEstrella extends AlgBusqueda {
         } while (!problema.comprobarFinal(elegido.getEstado()));
         costeTotal = elegido.getCoste();
         while (!nodoInicial(elegido)) {
+        	
             secuenciaAcciones.add(elegido.getAccion());
-
             elegido = elegido.getPadre();
         }
 

@@ -12,10 +12,6 @@ import problema.Accion;
 import problema.Estado;
 import problema.Problema;
 
-/**
- *
- * @author Jose
- */
 public abstract class AlgBusqueda {
 
 	protected Problema problema;
