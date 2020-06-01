@@ -140,12 +140,12 @@ public class Problema {
 		int[][] circuitoNuevo = new int[this.n][this.n];
 		estado.cloneCircuito(circuitoNuevo);
 
-		// Obtenemos la posicion del coche al que se la aplica la accion
+		
 		for (int i = 0; i < circuitoNuevo.length; i++) {
 			for (int j = 0; j < circuitoNuevo.length; j++) {
 				if (circuitoNuevo[i][j] == accion.coche) {
-					x = i;
-					y = j;
+					y = i;
+					x = j;
 				}
 			}
 
@@ -153,24 +153,24 @@ public class Problema {
 
 		switch (accion.id) {
 		case IZQUIERDA:
-			y--;
-			break;
-		case DERECHA:
-			y++;
-			break;
-		case ARRIBA:
 			x--;
 			break;
-		case ABAJO:
+		case DERECHA:
 			x++;
+			break;
+		case ARRIBA:
+			y--;
+			break;
+		case ABAJO:
+			y++;
 			break;
 		}
 
-		if ((x < 0) || (x > circuitoNuevo.length - 1) || (y < 0) || (y > circuitoNuevo.length - 1)) {
+		if ((y < 0) || (y > circuitoNuevo.length - 1) || (x < 0) || (x > circuitoNuevo.length - 1)) {
 			return Double.POSITIVE_INFINITY;
 		}
 
-		if (circuitoNuevo[x][y] == 0) {
+		if (circuitoNuevo[y][x] == 0) {
 			return 1.0;
 		}
 
@@ -203,9 +203,7 @@ public class Problema {
 		// Calculamos la suma de las distancias en linea recta de cada coche para llegar
 		// a la ultima fila
 		int[][] circuitoNuevo = estado.getCircuito();
-		// No hace falta clonar , no moficamos nada, recorremos el circuito de estado.
-		// estado.cloneCircuito(circuitoNuevo);
-
+		
 		double distancia = 0;
 
 		for (int i = 0; i < circuitoNuevo.length; i++) {
