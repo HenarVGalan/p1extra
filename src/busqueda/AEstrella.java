@@ -45,7 +45,7 @@ public class AEstrella extends AlgBusqueda {
             }
 
             elegido = abiertos.element();
-            abiertos.remove();
+            abiertos.remove();//quita a elegido de la cabeza de abiertos
             sucesores = getSucesores(elegido);
             
             while (!sucesores.isEmpty()) {
