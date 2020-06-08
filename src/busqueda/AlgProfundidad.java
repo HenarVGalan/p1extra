@@ -5,7 +5,6 @@
  */
 package busqueda;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
@@ -13,62 +12,61 @@ import problema.Accion;
 
 public class AlgProfundidad extends AlgBusqueda {
 
+	@Override
+	public void busqueda() {
 
-    @Override
-    public void busqueda() {
-        
-        costeTotal = 0;
-        nodosExpandidos = 0;
-        nodosGenerados = 0;
-        longSol = 0;
-        tiempoBusqueda = System.currentTimeMillis();       
-        secuenciaAcciones = new ArrayList<Accion>();
-        
-        Stack<Nodo> abiertos = new Stack<Nodo>();        
-        ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
-       
-        Nodo elegido;
-        ArrayList<Nodo> sucesores;
+		costeTotal = 0;
+		nodosExpandidos = 0;
+		nodosGenerados = 0;
+		longSol = 0;
+		tiempoBusqueda = System.currentTimeMillis();
+		secuenciaAcciones = new ArrayList<Accion>();
 
-        elegido = new Nodo(problema.estadoInicial());
+		Stack<Nodo> abiertos = new Stack<Nodo>();
+		ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
 
-        abiertos.push(elegido);
-       
-        do {
-           
-            if (abiertos.size() == 0) {
-                return;
-            }
+		Nodo elegido;
+		ArrayList<Nodo> sucesores;
 
-            elegido = abiertos.pop();
-            sucesores = getSucesores(elegido);
-            
-            while (!sucesores.isEmpty()) {
-                if (!cerrados.contains(sucesores.get(0))) {
-                    abiertos.push(sucesores.get(0));
-                    sucesores.remove(0);
+		elegido = new Nodo(problema.estadoInicial());
 
-                } else {
-                    sucesores.remove(0);
-                }
-            }
-            cerrados.add(elegido);
+		abiertos.push(elegido);
 
-        } while (!problema.comprobarFinal(elegido.getEstado()));
-        costeTotal = elegido.getCoste();
-        while (!nodoInicial(elegido)) {
-            secuenciaAcciones.add(elegido.getAccion());
+		do {
 
-            elegido = elegido.getPadre();
-        }
+			if (abiertos.size() == 0) {
+				return;
+			}
 
-        tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
+			elegido = abiertos.pop();
+			sucesores = getSucesores(elegido);
 
-         Collections.reverse(secuenciaAcciones);
-     	System.out.println("****   SOLUCIÓN ALGORITMO PROFUNDIDAD - DepthFirst *****");
-        for(int i=0;i<secuenciaAcciones.size();i++){
-            longSol++;
-            System.out.println(secuenciaAcciones.get(i).toString());
-        }
-    }
+			while (!sucesores.isEmpty()) {
+				if (!cerrados.contains(sucesores.get(0))) {
+					abiertos.push(sucesores.get(0));
+					sucesores.remove(0);
+
+				} else {
+					sucesores.remove(0);
+				}
+			}
+			cerrados.add(elegido);
+
+		} while (!problema.comprobarFinal(elegido.getEstado()));
+		costeTotal = elegido.getCoste();
+		while (!nodoInicial(elegido)) {
+			secuenciaAcciones.add(elegido.getAccion());
+
+			elegido = elegido.getPadre();
+		}
+
+		tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
+
+		Collections.reverse(secuenciaAcciones);
+		System.out.println("****   SOLUCIÓN ALGORITMO PROFUNDIDAD - DepthFirst *****");
+		for (int i = 0; i < secuenciaAcciones.size(); i++) {
+			longSol++;
+			System.out.println(secuenciaAcciones.get(i).toString());
+		}
+	}
 }

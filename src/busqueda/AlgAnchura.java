@@ -24,8 +24,10 @@ public class AlgAnchura extends AlgBusqueda {
 		nodosGenerados = 0;
 		longSol = 0;
 		tiempoBusqueda = System.currentTimeMillis();
-
 		secuenciaAcciones = new ArrayList<Accion>();
+		
+		//estructura de datos necesarias para la búsqueda
+		//FIFO
 		Queue<Nodo> abiertos = new LinkedList<Nodo>();
 		Queue<Nodo> cerrados = new LinkedList<Nodo>();
 

@@ -14,19 +14,17 @@ public class Practica1 {
 
 	public static void main(String[] args) {
 
-		
 		int n = Integer.parseInt(args[0]);
 		int ncoches = Integer.parseInt(args[1]);
 		int seed = Integer.parseInt(args[2]);
 		String alg = args[4];
 
-		
 		int[][] circuito = getProblemInstance(n, ncoches, seed);
 		Problema problema = new Problema(circuito, n, ncoches, seed);
-		
+
 		System.out.println(" Estado Inicial ");
 		printMaze(circuito);
-		
+
 		AlgBusqueda algBusq;
 		if (null == alg) {
 			System.out.println("Parametros mal introducidos");
@@ -103,7 +101,7 @@ public class Practica1 {
 			pos = list.remove(gen.nextInt(list.size()));
 			maze[0][pos] = c + 1;
 		}
-		
+
 		return maze;
 	}
 

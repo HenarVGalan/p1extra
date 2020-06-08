@@ -29,8 +29,8 @@ public class Problema {
 		int x = 0;
 		int y = 0;
 
-		// Obtenemos la posicion del coche
-		// al que se le quiere aplicar la accion
+		// Recorremos el circuito hasta dar con el coche ( id coche = accion.coche )
+		// Este es el coche al que queremos aplicar la acción
 		for (int i = 0; i < circuitoNuevo.length; i++) {
 			for (int j = 0; j < circuitoNuevo.length; j++) {
 				if (circuitoNuevo[i][j] == idCoche) {
@@ -40,54 +40,62 @@ public class Problema {
 			}
 		}
 
+		// Movemos al agente. Cambiamos sus coordenadas.
 		switch (accion.id) {
 		case IZQUIERDA:
-			x--;
+			x--; // movemos al agente
+			circuitoNuevo[y][x + 1] = 0; // la posición que ocupaba la ponemos a 0
+			circuitoNuevo[y][x] = idCoche; // la posición que va a ocupar ponemos el id del coche.
 			break;
 		case DERECHA:
 			x++;
+			circuitoNuevo[y][x - 1] = 0;
+			circuitoNuevo[y][x] = idCoche;
 			break;
 		case ARRIBA:
 			y--;
+			circuitoNuevo[y + 1][x] = 0;
+			circuitoNuevo[y][x] = idCoche;
 			break;
 		case ABAJO:
 			y++;
+			circuitoNuevo[y - 1][x] = 0;
+			circuitoNuevo[y][x] = idCoche;
 			break;
 		}
 
+		return new Estado(circuitoNuevo);
+
 		// Comprobacion de que no se sale de los limites del circuito
-		if ((y < 0) || (y > circuitoNuevo.length - 1) || (x < 0) || (x > circuitoNuevo.length - 1)) {
-			return null;
-		}
+		// Pero creo que no hace falta porque ya lo considero en posiblesAcciones
+		/*
+		 * if ((y < 0) || (y > circuitoNuevo.length - 1) || (x < 0) || (x >
+		 * circuitoNuevo.length - 1)) { return null; }
+		 */
 
-		// Comprobacion de si esa casilla esta disponible en el circuito
-		if ((circuitoNuevo[y][x]) == 0) {
-			switch (accion.id) {
-			case IZQUIERDA:
-				circuitoNuevo[y][x + 1] = 0;
-				circuitoNuevo[y][x] = accion.coche;
-				break;
+		// Como hemos movido el coche,
+		// la casilla que anteriormente ocupaba tenemos que dejarla vacía.
+		// Aqui filtramos, por si la casilla que acabo de querer posicionar el agente,
+		// está ocupada,
+		// tampoco sería necesario porque lo tengo en cuenta en posiblesAcciones.
 
-			case DERECHA:
-				circuitoNuevo[y][x - 1] = 0;
-				circuitoNuevo[y][x] = accion.coche;
-				break;
-
-			case ARRIBA:
-				circuitoNuevo[y + 1][x] = 0;
-				circuitoNuevo[y][x] = accion.coche;
-				break;
-
-			case ABAJO:
-				circuitoNuevo[y - 1][x] = 0;
-				circuitoNuevo[y][x] = accion.coche;
-				break;
-			}
-
-			return new Estado(circuitoNuevo);
-		}
-
-		return null;
+		/*
+		 * if ((circuitoNuevo[y][x]) == 0) { switch (accion.id) { case IZQUIERDA:
+		 * circuitoNuevo[y][x + 1] = 0; circuitoNuevo[y][x] = accion.coche; break;
+		 * 
+		 * case DERECHA: circuitoNuevo[y][x - 1] = 0; circuitoNuevo[y][x] =
+		 * accion.coche; break;
+		 * 
+		 * case ARRIBA: circuitoNuevo[y + 1][x] = 0; circuitoNuevo[y][x] = accion.coche;
+		 * break;
+		 * 
+		 * case ABAJO: circuitoNuevo[y - 1][x] = 0; circuitoNuevo[y][x] = accion.coche;
+		 * break; }
+		 * 
+		 * return new Estado(circuitoNuevo); }
+		 * 
+		 * return null;
+		 */
 
 	}
 
@@ -97,12 +105,21 @@ public class Problema {
 		estado.cloneCircuito(circuito);
 		ArrayList<Accion> acciones = new ArrayList<Accion>();
 
+		// El orden en el que determino explorar las posibilidades influirá en el número
+		// de nodos expandidos, explorados
+		// la primera opción que considero es ir hacia abajo, por lo tanto , si es
+		// posible la añado
+		// y se situará en la primera posición luego en aplicar
+		// FIFO
+
 		for (int i = 0; i < circuito.length; i++) {
 			for (int j = 0; j < circuito.length; j++) {
 
 				if ((circuito[i][j] != 0) && (circuito[i][j] != -1)) {
 
+					// i nos marca la altura, mientras sea menor que circuito.length - 1 podrá bajar
 					if (i < circuito.length - 1) {
+						// Comprobamos justo que la casilla hacia abajo esté libre == 0
 						if (circuito[i + 1][j] == 0) {
 							acciones.add(new Accion(Accion.Movimiento.ABAJO, circuito[i][j]));
 						}
@@ -140,7 +157,6 @@ public class Problema {
 		int[][] circuitoNuevo = new int[this.n][this.n];
 		estado.cloneCircuito(circuitoNuevo);
 
-		
 		for (int i = 0; i < circuitoNuevo.length; i++) {
 			for (int j = 0; j < circuitoNuevo.length; j++) {
 				if (circuitoNuevo[i][j] == accion.coche) {
@@ -193,7 +209,7 @@ public class Problema {
 					return true;
 			}
 		}
-		
+
 		return false;
 
 	}
@@ -203,7 +219,7 @@ public class Problema {
 		// Calculamos la suma de las distancias en linea recta de cada coche para llegar
 		// a la ultima fila
 		int[][] circuitoNuevo = estado.getCircuito();
-		
+
 		double distancia = 0;
 
 		for (int i = 0; i < circuitoNuevo.length; i++) {

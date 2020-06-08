@@ -7,7 +7,7 @@ public class Accion {
 
 	public enum Movimiento {
 
-		// Tipos Movimientos
+		// Tipos de movimientos
 		DERECHA("DERECHA"), IZQUIERDA("IZQUIERDA"), ARRIBA("ARRIBA"), ABAJO("ABAJO");
 
 		private final String id;
@@ -29,6 +29,6 @@ public class Accion {
 
 	public String toString() {
 		// return("( "+this.coche +" , "+ this.id+ " )");
-		return ("- Coche:" + this.coche +"- Accion:" + this.id);
+		return ("- Coche:" + this.coche + "- Accion:" + this.id);
 	}
 }

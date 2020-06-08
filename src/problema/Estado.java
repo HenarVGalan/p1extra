@@ -3,7 +3,7 @@ package problema;
 import java.util.Arrays;
 
 public class Estado {
-
+    //push
 	protected int[][] circuito;
 
 	public Estado(int[][] circuito) {
