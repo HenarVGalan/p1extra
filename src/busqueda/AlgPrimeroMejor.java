@@ -31,7 +31,6 @@ public class AlgPrimeroMejor extends AlgBusqueda {
 		ArrayList<Nodo> sucesores;
 
 		elegido = new Nodo(problema.estadoInicial());
-		sucesores = getSucesores(elegido);
 		abiertos.add(elegido);
 
 		do {
@@ -39,9 +38,10 @@ public class AlgPrimeroMejor extends AlgBusqueda {
 			if (abiertos.size() == 0) {
 				return;
 			}
-
+			//la función element() solo devuelve el primer nodo, pero no elimina de abiertos
+			//por eso es necesario borrarlo después.
 			elegido = abiertos.element();
-			abiertos.remove();
+			abiertos.remove(); //borra la cabeza
 			sucesores = getSucesores(elegido);
 
 			while (!sucesores.isEmpty()) {

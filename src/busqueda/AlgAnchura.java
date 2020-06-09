@@ -43,17 +43,15 @@ public class AlgAnchura extends AlgBusqueda {
 
 			// Si el nodo sucesor no se encuentra abierto y tampoco cerrado, lo guardamos en
 			// abierto
-			for (int i = 0; i < sucesores.size(); i++) {
+			while (!sucesores.isEmpty()) {
+				if (!abiertos.contains(sucesores.get(0)) && !cerrados.contains(sucesores.get(0))) {
+					abiertos.add(sucesores.get(0));
+					sucesores.remove(0);
 
-				if (!abiertos.contains(sucesores.get(i)) && !cerrados.contains(sucesores.get(i))) {
-					abiertos.add(sucesores.get(i));
-					sucesores.remove(i);
 				} else {
-
-					sucesores.remove(i);
+					sucesores.remove(0);
 				}
 			}
-
 			cerrados.add(elegido);
 
 		} while (!problema.comprobarFinal(elegido.getEstado()));
@@ -64,7 +62,7 @@ public class AlgAnchura extends AlgBusqueda {
 			//costeTotal = costeTotal + problema.coste(elegido.getPadre().getEstado(), elegido.getAccion());
 			secuenciaAcciones.add(elegido.getAccion());
 			elegido = elegido.getPadre();
-			// Practica1.printMaze(elegido.getEstado().getCircuito());
+			
 
 		}
 

@@ -37,6 +37,8 @@ public class Nodo {
 		return profundidad;
 	}
 
+	//Si se actualiza del valor del coste, se tendrán que actualizar dos atributos
+	//el mismo coste y la evaluacion
 	public void setCoste(double coste) {
 		this.coste = coste;
 		evaluacion = this.coste + this.heuristica;
@@ -46,6 +48,8 @@ public class Nodo {
 		return coste;
 	}
 
+	//Si se actualiza del valor de la heurística, se tendrán que actualizar dos atributos
+	//la misma heurística y la evaluación
 	public void setHeuristica(double heuristica) {
 		this.heuristica = heuristica;
 		evaluacion = this.coste + this.heuristica;
@@ -98,7 +102,7 @@ public class Nodo {
 				+ coste + "\n\th:" + heuristica + ".");
 	}
 
-	// Implementation of the comparators
+	//Métodos comparadores de nodos 
 
 	public static class HeuristicComparator implements Comparator<Nodo> {
 		public int compare(Nodo nodeA, Nodo nodeB) {

@@ -35,8 +35,8 @@ public class AEstrella extends AlgBusqueda {
         ArrayList<Nodo> sucesores;
       
         elegido = new Nodo(problema.estadoInicial());      
-        sucesores = getSucesores(elegido);
         abiertos.add(elegido);
+        
         // Bucle principal
         do {
            
