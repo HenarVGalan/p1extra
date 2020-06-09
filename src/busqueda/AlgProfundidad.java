@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package busqueda;
 
 import java.util.ArrayList;
@@ -14,7 +9,7 @@ public class AlgProfundidad extends AlgBusqueda {
 
 	@Override
 	public void busqueda() {
-
+		// Inicializamos las variables
 		costeTotal = 0;
 		nodosExpandidos = 0;
 		nodosGenerados = 0;
@@ -22,6 +17,8 @@ public class AlgProfundidad extends AlgBusqueda {
 		tiempoBusqueda = System.currentTimeMillis();
 		secuenciaAcciones = new ArrayList<Accion>();
 
+		//Estructura de datos 
+		//LIFO. Last IN , First OUT
 		Stack<Nodo> abiertos = new Stack<Nodo>();
 		ArrayList<Nodo> cerrados = new ArrayList<Nodo>();
 
@@ -42,7 +39,7 @@ public class AlgProfundidad extends AlgBusqueda {
 			sucesores = getSucesores(elegido);
 
 			while (!sucesores.isEmpty()) {
-				if (!cerrados.contains(sucesores.get(0))) {
+				if (!abiertos.contains(sucesores.get(0)) && !cerrados.contains(sucesores.get(0))) {
 					abiertos.push(sucesores.get(0));
 					sucesores.remove(0);
 
@@ -53,15 +50,16 @@ public class AlgProfundidad extends AlgBusqueda {
 			cerrados.add(elegido);
 
 		} while (!problema.comprobarFinal(elegido.getEstado()));
+		
 		costeTotal = elegido.getCoste();
 		while (!nodoInicial(elegido)) {
+			
+			//costeTotal = costeTotal + problema.coste(elegido.getPadre().getEstado(), elegido.getAccion());			
 			secuenciaAcciones.add(elegido.getAccion());
-
 			elegido = elegido.getPadre();
 		}
 
 		tiempoBusqueda = System.currentTimeMillis() - tiempoBusqueda;
-
 		Collections.reverse(secuenciaAcciones);
 		System.out.println("****   SOLUCIÓN ALGORITMO PROFUNDIDAD - DepthFirst *****");
 		for (int i = 0; i < secuenciaAcciones.size(); i++) {

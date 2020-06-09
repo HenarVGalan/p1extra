@@ -45,6 +45,7 @@ public class AlgPrimeroMejor extends AlgBusqueda {
 			sucesores = getSucesores(elegido);
 
 			while (!sucesores.isEmpty()) {
+				//!abiertos.contains(sucesores.get(0)) &&
 				if (!cerrados.contains(sucesores.get(0))) {
 
 					abiertos.add(sucesores.get(0));
