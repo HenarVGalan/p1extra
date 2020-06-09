@@ -84,7 +84,7 @@ public abstract class AlgBusqueda {
 
 			double costeAccion = problema.coste(nodo.getEstado(), acciones.get(i));
 			nodoNuevo.setCoste(nodo.getCoste() + costeAccion);
-			nodoNuevo.setHeuristica(problema.heuristica(estadoNuevo));
+			nodoNuevo.setHeuristica(problema.heuristica(estadoNuevo,problema.nHeuristica));
 			nodoNuevo.setProfundidad(nodo.getProfundidad() + 1);
 
 			sucesores.add(nodoNuevo);

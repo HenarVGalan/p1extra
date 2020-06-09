@@ -94,9 +94,7 @@ public class Nodo {
 		return ("Nodo(" + estado.toString() + ")");
 	}
 
-	/**
-	 * Prints all the information of the node.
-	 */
+	
 	public void print() {
 		System.out.println("Nodo (" + estado.toString() + "):" + "\n\tprofundidad:" + profundidad + " \n\tcoste:"
 				+ coste + "\n\th:" + heuristica + ".");

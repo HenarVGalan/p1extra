@@ -61,9 +61,10 @@ public class AEstrella extends AlgBusqueda {
             cerrados.add(elegido);
 
         } while (!problema.comprobarFinal(elegido.getEstado()));
+        //Como ya hemos dado con el estado final, hallamos el coste  ese nodo
         costeTotal = elegido.getCoste();
-        while (!nodoInicial(elegido)) {
-        	
+        
+        while (!nodoInicial(elegido)) {        	
             secuenciaAcciones.add(elegido.getAccion());
             elegido = elegido.getPadre();
         }

@@ -1,20 +1,21 @@
 package problema;
 
 import java.util.ArrayList;
-
 import problema.Practica1;
 
 public class Problema {
 
 	protected Estado circuito;
 	protected int n, nCoches, seed;
-
-	public Problema(int[][] circuito, int n, int nCoches, int seed) {
+	public int nHeuristica;
+	
+	public Problema(int[][] circuito, int n, int nCoches, int seed, int nHeuristica) {
 
 		this.circuito = new Estado(circuito);
 		this.n = n;
 		this.nCoches = nCoches;
 		this.seed = seed;
+		this.nHeuristica = nHeuristica;
 	}
 
 	public Estado estadoInicial() {
@@ -198,8 +199,7 @@ public class Problema {
 		int[][] circuitoNuevo = new int[this.n][this.n];
 		estado.cloneCircuito(circuitoNuevo);
 		int nCochesFinal = 0;
-		// int nCoches = 0;
-
+		
 		for (int j = 0; j < circuitoNuevo.length; j++) {
 			for (int i = (circuitoNuevo.length - 1); i < circuitoNuevo.length; i++) {
 
@@ -214,24 +214,44 @@ public class Problema {
 
 	}
 
-	public double heuristica(Estado estado) {
+	public double heuristica(Estado estado, int nHeuristica) {
 
-		// Calculamos la suma de las distancias en linea recta de cada coche para llegar
-		// a la ultima fila
 		int[][] circuitoNuevo = estado.getCircuito();
-
 		double distancia = 0;
+		int nCochesFinal = 0;
+		int cochesMal = 0;
 
-		for (int i = 0; i < circuitoNuevo.length; i++) {
-			for (int j = 0; j < circuitoNuevo.length; j++) {
-				if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1)) {
-					distancia = distancia + ((circuitoNuevo.length) - 1 - i);
+			// Heurística 1: Calculamos la suma de las distancias
+			// en linea recta de cada coche para llegar a la ultima fila
+
+			for (int i = 0; i < circuitoNuevo.length; i++) {
+				for (int j = 0; j < circuitoNuevo.length; j++) {
+					if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1)) {
+						distancia = distancia + ((circuitoNuevo.length) - 1 - i);
+						
+					}
 				}
 			}
+		
+
+		if (nHeuristica == 2) {
+			//Heurística 2 : Será la H1 + Nº de coches que  no están en el final.(mal colocados)
+			for (int j = 0; j < circuitoNuevo.length; j++) {
+				for (int i = (circuitoNuevo.length - 1); i < circuitoNuevo.length; i++) {
+
+					if ((circuitoNuevo[i][j] != 0) && (circuitoNuevo[i][j] != -1))
+						nCochesFinal++;				
+						
+				}
+			}
+			//System.out.println("****  estas en la 2 *****");
+			cochesMal = this.nCoches - nCochesFinal;
+			System.out.println("****  estas en la 2 *****"+ distancia + cochesMal);
+			return distancia + cochesMal;
+
 		}
-		// System.out.println("----------------------------------> Distancia Heuristica
-		// 1 : " + distancia);
 		return distancia;
+
 	}
 
 }

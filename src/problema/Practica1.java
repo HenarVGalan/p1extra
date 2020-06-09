@@ -18,9 +18,10 @@ public class Practica1 {
 		int ncoches = Integer.parseInt(args[1]);
 		int seed = Integer.parseInt(args[2]);
 		String alg = args[4];
+		int nHeuristica = Integer.parseInt( args[5]);
 
 		int[][] circuito = getProblemInstance(n, ncoches, seed);
-		Problema problema = new Problema(circuito, n, ncoches, seed);
+		Problema problema = new Problema(circuito, n, ncoches, seed, nHeuristica);
 
 		System.out.println(" Estado Inicial ");
 		printMaze(circuito);
@@ -57,7 +58,7 @@ public class Practica1 {
 			}
 		}
 
-		System.out.println("\t -> Tamaño matriz: " + n);
+		System.out.println("\t -> Tamaño matriz: " + n + " -> Número de coches: "+ ncoches + " -> Semilla: "+seed);
 		System.out.println("\t -> Longitud Solucion:" + algBusq.getLongSol());
 		System.out.println("\t -> Coste:" + algBusq.getCosteTotal());
 		System.out.println("\t -> Nodos Generados: " + algBusq.getNodosGenerados());
